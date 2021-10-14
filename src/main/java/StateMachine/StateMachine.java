@@ -25,6 +25,8 @@ public class StateMachine implements IStateMachine{
 
     public void setInitialState(IState initialState) {
         this.initialState = initialState;
+        this.currentState = initialState;
+
     }
 
     public void setFinalState(IState finalState) {
@@ -65,7 +67,21 @@ public class StateMachine implements IStateMachine{
 
     @Override
     public IState fire(IEvent event) {
-        return null;
+        if(event == null){
+            return null;
+        }else{
+            for (ITransition transition : transitions) {
+                if (currentState.equals(transition.getSourceState()) &&
+                        transition.getEvent() == event) {
+                    if(transition.getActionHandler() !=null){
+                        transition.getActionHandler().executeAction(event);
+                    }
+                    currentState = transition.getDestinationState();
+                    break;
+                }
+            }
+            return currentState;
+        }
     }
 
 }

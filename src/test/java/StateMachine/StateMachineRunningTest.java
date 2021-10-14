@@ -61,7 +61,7 @@ public class StateMachineRunningTest {
     }
 
     @Test
-    public void firefirstEvent() {
+    public void fireOneEvent() {
         Set<ITransition> testTransitions = new HashSet<ITransition>();
         testTransitions.add(new TransitionBuilder("test01")
                 .registerSourceState(TestState.TEST_STATE_1)
@@ -84,5 +84,58 @@ public class StateMachineRunningTest {
                 .build();
 
         assert(stateMachine.fire(TestEvent.TEST_EVENT_1) == TestState.TEST_STATE_2);
+    }
+
+    @Test
+    public void fireTwoEvents() {
+        Set<ITransition> testTransitions = new HashSet<ITransition>();
+        testTransitions.add(new TransitionBuilder("test01")
+                .registerSourceState(TestState.TEST_STATE_1)
+                .registerDestinationState(TestState.TEST_STATE_2)
+                .registerEvent(TestEvent.TEST_EVENT_1)
+                .registerActionHandler(null)
+                .build());
+        testTransitions.add(new TransitionBuilder("test02")
+                .registerSourceState(TestState.TEST_STATE_2)
+                .registerDestinationState(TestState.TEST_STATE_3)
+                .registerEvent(TestEvent.TEST_EVENT_2)
+                .registerActionHandler(null)
+                .build());
+        StateMachine stateMachine = new StateMachineBuilder("test")
+                .registerInitialState(TestState.TEST_STATE_1)
+                .registerFinalState(TestState.TEST_STATE_3)
+                .registerTransitions(testTransitions)
+                .registerEvents(testEvents)
+                .registerSates(testStates)
+                .build();
+
+        stateMachine.fire(TestEvent.TEST_EVENT_1);
+        assert(stateMachine.fire(TestEvent.TEST_EVENT_2) == TestState.TEST_STATE_3);
+    }
+
+    @Test
+    public void fireWrongEvent() {
+        Set<ITransition> testTransitions = new HashSet<ITransition>();
+        testTransitions.add(new TransitionBuilder("test01")
+                .registerSourceState(TestState.TEST_STATE_1)
+                .registerDestinationState(TestState.TEST_STATE_2)
+                .registerEvent(TestEvent.TEST_EVENT_1)
+                .registerActionHandler(null)
+                .build());
+        testTransitions.add(new TransitionBuilder("test02")
+                .registerSourceState(TestState.TEST_STATE_2)
+                .registerDestinationState(TestState.TEST_STATE_3)
+                .registerEvent(TestEvent.TEST_EVENT_2)
+                .registerActionHandler(null)
+                .build());
+        StateMachine stateMachine = new StateMachineBuilder("test")
+                .registerInitialState(TestState.TEST_STATE_1)
+                .registerFinalState(TestState.TEST_STATE_3)
+                .registerTransitions(testTransitions)
+                .registerEvents(testEvents)
+                .registerSates(testStates)
+                .build();
+
+        assert(stateMachine.fire(TestEvent.TEST_EVENT_3) == TestState.TEST_STATE_1);
     }
 }
