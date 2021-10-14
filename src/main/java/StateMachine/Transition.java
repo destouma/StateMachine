@@ -44,11 +44,11 @@ public class Transition implements ITransition {
 
     @Override
     public IEvent getEvent() {
-        return null;
+        return this.event;
     }
 
     @Override
     public IActionHandler getActionHandler() {
-        return null;
+        return this.actionHandler;
     }
 }

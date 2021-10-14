@@ -1,12 +1,16 @@
 package StateMachine;
 
 import org.junit.jupiter.api.Test;
-enum ExampleState implements IState {
+enum TestState implements IState {
     TEST_STATE_1,
     TEST_STATE_2,
     TEST_STATE_3;
 }
-
+enum TestEvent implements IEvent {
+    TEST_EVENT_1,
+    TEST_EVENT_2,
+    TEST_EVENT_3;
+}
 public class TransitionTest {
     @Test
     public void nameIsNull() {
@@ -30,15 +34,15 @@ public class TransitionTest {
     @Test
     public void sourceStateNotNull() {
         Transition t = new Transition("test");
-        t.setSourceState(ExampleState.TEST_STATE_1);
+        t.setSourceState(TestState.TEST_STATE_1);
         assert(t.getSourceState()!=null);
     }
 
     @Test
     public void sourceStateEqualValue() {
         Transition t = new Transition("test");
-        t.setSourceState(ExampleState.TEST_STATE_1);
-        assert(t.getSourceState()==ExampleState.TEST_STATE_1);
+        t.setSourceState(TestState.TEST_STATE_1);
+        assert(t.getSourceState()==TestState.TEST_STATE_1);
     }
 
     @Test
@@ -51,15 +55,36 @@ public class TransitionTest {
     @Test
     public void destinationStateNotNull() {
         Transition t = new Transition("test");
-        t.setDestinationState(ExampleState.TEST_STATE_1);
+        t.setDestinationState(TestState.TEST_STATE_1);
         assert(t.getDestinationState()!=null);
     }
 
     @Test
     public void destinationEqualValue() {
         Transition t = new Transition("test");
-        t.setDestinationState(ExampleState.TEST_STATE_1);
-        assert(t.getDestinationState()==ExampleState.TEST_STATE_1);
+        t.setDestinationState(TestState.TEST_STATE_1);
+        assert(t.getDestinationState()==TestState.TEST_STATE_1);
+    }
+
+    @Test
+    public void eventIsNull() {
+        Transition t = new Transition("test");
+        t.setEvent(null);
+        assert(t.getEvent()==null);
+    }
+
+    @Test
+    public void eventNotNull() {
+        Transition t = new Transition("test");
+        t.setEvent(TestEvent.TEST_EVENT_1);
+        assert(t.getEvent()!=null);
+    }
+
+    @Test
+    public void eventEqualValue() {
+        Transition t = new Transition("test");
+        t.setEvent(TestEvent.TEST_EVENT_1);
+        assert(t.getEvent()==TestEvent.TEST_EVENT_1);
     }
 
 }
