@@ -29,17 +29,17 @@ public class Transition implements ITransition {
 
     @Override
     public String getName() {
-        return null;
+        return this.name;
     }
 
     @Override
     public IState getSourceState() {
-        return null;
+        return this.sourceState;
     }
 
     @Override
     public IState getDestinationState() {
-        return null;
+        return this.destinationState;
     }
 
     @Override
