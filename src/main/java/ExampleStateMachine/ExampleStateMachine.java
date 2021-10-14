@@ -8,7 +8,6 @@ import StateMachine.StateMachineBuilder;
 import StateMachine.TransitionBuilder;
 import StateMachine.IActionHandler;
 
-
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;

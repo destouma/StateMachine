@@ -71,8 +71,8 @@ public class StateMachine implements IStateMachine{
             return null;
         }else{
             for (ITransition transition : transitions) {
-                if (currentState.equals(transition.getSourceState()) &&
-                        transition.getEvent() == event) {
+                if (currentState == transition.getSourceState()
+                    && event == transition.getEvent() ) {
                     if(transition.getActionHandler() !=null){
                         transition.getActionHandler().executeAction(event);
                     }
