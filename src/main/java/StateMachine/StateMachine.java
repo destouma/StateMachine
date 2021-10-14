@@ -4,6 +4,7 @@ import java.util.Set;
 
 public class StateMachine implements IStateMachine{
     private String name;
+    private IState initialState;
     private IState currentState;
     private IState finalState;
     private IEvent currentEvent;
@@ -14,10 +15,15 @@ public class StateMachine implements IStateMachine{
     StateMachine(String name){
         this.name = name;
         this.currentEvent = null;
+        this.initialState = null;
         this.currentState = null;
         this.finalState = null;
         this.states = null;
         this.transitions = null;
+    }
+
+    public void setInitialState(IState initialState) {
+        this.currentState = initialState;
     }
 
     public void setCurrentState(IState currentState) {
@@ -42,17 +48,22 @@ public class StateMachine implements IStateMachine{
 
     @Override
     public String getName() {
-        return null;
+        return this.name;
     }
 
     @Override
     public IState getCurrentState() {
-        return null;
+        return this.currentState;
     }
 
     @Override
     public IState getInitialState() {
-        return null;
+        return this.initialState;
+    }
+
+    @Override
+    public IState getFinalState() {
+        return this.finalState;
     }
 
     @Override

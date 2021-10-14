@@ -10,6 +10,8 @@ public interface IStateMachine {
 
     IState getInitialState();
 
+    IState getFinalState();
+
     Set<IState> getStates();
 
     Set<ITransition> getTransitions();
