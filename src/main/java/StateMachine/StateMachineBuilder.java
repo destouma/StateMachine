@@ -5,7 +5,7 @@ import java.util.Set;
 public class StateMachineBuilder {
     private final StateMachine stateMachine;
 
-    StateMachineBuilder(String name){
+    public StateMachineBuilder(String name){
         this.stateMachine = new StateMachine(name);
     }
 
