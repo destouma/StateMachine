@@ -4,6 +4,8 @@ import java.util.Set;
 
 public interface IStateMachine {
 
+    String getName();
+
     IState getCurrentState();
 
     IState getInitialState();
@@ -13,5 +15,4 @@ public interface IStateMachine {
     Set<ITransition> getTransitions();
 
     IState fire(IEvent event);
-
 }
