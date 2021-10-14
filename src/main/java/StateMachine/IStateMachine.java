@@ -12,9 +12,5 @@ public interface IStateMachine {
 
     IState getFinalState();
 
-    Set<IState> getStates();
-
-    Set<ITransition> getTransitions();
-
     IState fire(IEvent event);
 }

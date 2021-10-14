@@ -11,6 +11,7 @@ public class StateMachine implements IStateMachine{
 
     private Set<ITransition> transitions;
     private Set<IState> states;
+    private Set<IEvent> events;
 
     StateMachine(String name){
         this.name = name;
@@ -23,19 +24,11 @@ public class StateMachine implements IStateMachine{
     }
 
     public void setInitialState(IState initialState) {
-        this.currentState = initialState;
-    }
-
-    public void setCurrentState(IState currentState) {
-        this.currentState = currentState;
+        this.initialState = initialState;
     }
 
     public void setFinalState(IState finalState) {
         this.finalState = finalState;
-    }
-
-    public void setCurrentEvent(IEvent currentEvent) {
-        this.currentEvent = currentEvent;
     }
 
     public void setStates(Set<IState> states) {
@@ -44,6 +37,10 @@ public class StateMachine implements IStateMachine{
 
     public void setTransitions(Set<ITransition> transitions) {
         this.transitions = transitions;
+    }
+
+    public void setEvents(Set<IEvent> events) {
+        this.events = events;
     }
 
     @Override
@@ -64,16 +61,6 @@ public class StateMachine implements IStateMachine{
     @Override
     public IState getFinalState() {
         return this.finalState;
-    }
-
-    @Override
-    public Set<IState> getStates() {
-        return null;
-    }
-
-    @Override
-    public Set<ITransition> getTransitions() {
-        return null;
     }
 
     @Override

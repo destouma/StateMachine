@@ -9,13 +9,8 @@ public class StateMachineBuilder {
         this.stateMachine = new StateMachine(name);
     }
 
-    public StateMachineBuilder registerCurrentEvent(IEvent event){
-        this.stateMachine.setCurrentEvent(event);
-        return this;
-    }
-
-    public StateMachineBuilder registerCurrentState(IState state){
-        this.stateMachine.setCurrentState(state);
+    public StateMachineBuilder registerInitialState(IState state){
+        this.stateMachine.setInitialState(state);
         return this;
     }
 
@@ -31,6 +26,11 @@ public class StateMachineBuilder {
 
     public StateMachineBuilder registerTransitions(Set<ITransition> transitions){
         this.stateMachine.setTransitions(transitions);
+        return this;
+    }
+
+    public StateMachineBuilder registerEvents(Set<IEvent> events){
+        this.stateMachine.setEvents(events);
         return this;
     }
 

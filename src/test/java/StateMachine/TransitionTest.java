@@ -1,17 +1,19 @@
 package StateMachine;
 
 import org.junit.jupiter.api.Test;
-enum TestState implements IState {
-    TEST_STATE_1,
-    TEST_STATE_2,
-    TEST_STATE_3;
-}
-enum TestEvent implements IEvent {
-    TEST_EVENT_1,
-    TEST_EVENT_2,
-    TEST_EVENT_3;
-}
+
 public class TransitionTest {
+    enum TestState implements IState {
+        TEST_STATE_1,
+        TEST_STATE_2,
+        TEST_STATE_3;
+    }
+    enum TestEvent implements IEvent {
+        TEST_EVENT_1,
+        TEST_EVENT_2,
+        TEST_EVENT_3;
+    }
+
     @Test
     public void nameIsNull() {
         Transition t = new Transition(null);
