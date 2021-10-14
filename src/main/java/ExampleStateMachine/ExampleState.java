@@ -1,4 +1,4 @@
-package StateMachineExample;
+package ExampleStateMachine;
 
 import StateMachine.IState;
 

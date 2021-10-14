@@ -1,4 +1,4 @@
-package StateMachineExample;
+package ExampleStateMachine;
 
 import StateMachine.StateMachine;
 import StateMachine.ITransition;
@@ -16,13 +16,14 @@ import java.util.Set;
 public class ExampleStateMachine {
     private StateMachine stateMachine;
     private Set<ITransition> transitions;
+
     private Set<IState> states = new HashSet<>(Arrays.asList(
             ExampleState.STATE_INIT,
             ExampleState.STATE_STARTED,
             ExampleState.STATE_CONNECTED,
             ExampleState.STATE_FINISHED));
 
-    Set<IEvent> events = new HashSet<>(Arrays.asList(
+    private Set<IEvent> events = new HashSet<>(Arrays.asList(
             ExampleEvent.EVT_START,
             ExampleEvent.EVT_CONNECT,
             ExampleEvent.EVT_FINISH));
