@@ -29,10 +29,6 @@ public class StateMachineRunningTest {
             TestEvent.TEST_EVENT_2,
             TestEvent.TEST_EVENT_3));
 
-    static Set<ITransition> testTransitions;
-
-    static StateMachine stateMachine;
-
     @Test
     public void fireNullEvent() {
         Set<ITransition> testTransitions = new HashSet<ITransition>();
