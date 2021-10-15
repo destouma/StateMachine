@@ -7,14 +7,11 @@ public class StateMachine implements IStateMachine{
     private IState initialState;
     private IState currentState;
     private IState finalState;
-    private IEvent currentEvent;
 
     private Set<ITransition> transitions;
 
-
     StateMachine(String name){
         this.name = name;
-        this.currentEvent = null;
         this.initialState = null;
         this.currentState = null;
         this.finalState = null;
@@ -33,6 +30,11 @@ public class StateMachine implements IStateMachine{
 
     public void setTransitions(Set<ITransition> transitions) {
         this.transitions = transitions;
+    }
+
+    @Override
+    public void init() {
+        this.currentState = this.initialState;
     }
 
     @Override

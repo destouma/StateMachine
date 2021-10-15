@@ -4,6 +4,8 @@ import java.util.Set;
 
 public interface IStateMachine {
 
+    void init();
+
     String getName();
 
     IState getCurrentState();
