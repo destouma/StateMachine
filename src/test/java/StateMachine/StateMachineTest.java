@@ -19,8 +19,6 @@ public class StateMachineTest {
             TestState.TEST_STATE_2,
             TestState.TEST_STATE_3));
 
-    Set<ITransition> testTransitions;
-
     @Test
     public void nameIsNull() {
         StateMachine m = new StateMachine(null);
@@ -74,5 +72,6 @@ public class StateMachineTest {
         m.setFinalState(TestState.TEST_STATE_1);
         assert(m.getFinalState()==TestState.TEST_STATE_1);
     }
+
 
 }
