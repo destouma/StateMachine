@@ -19,18 +19,8 @@ public class StateMachineBuilder {
         return this;
     }
 
-    public StateMachineBuilder registerSates(Set<IState> states){
-        this.stateMachine.setStates(states);
-        return this;
-    }
-
     public StateMachineBuilder registerTransitions(Set<ITransition> transitions){
         this.stateMachine.setTransitions(transitions);
-        return this;
-    }
-
-    public StateMachineBuilder registerEvents(Set<IEvent> events){
-        this.stateMachine.setEvents(events);
         return this;
     }
 

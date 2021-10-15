@@ -1,47 +1,41 @@
-package ExampleStateMachine;
+package LoopStateMachine;
 
-import StateMachine.StateMachine;
-import StateMachine.ITransition;
-import StateMachine.IState;
-import StateMachine.IEvent;
-import StateMachine.StateMachineBuilder;
-import StateMachine.TransitionBuilder;
-import StateMachine.IActionHandler;
+import StateMachine.*;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ExampleStateMachine {
+public class LoopStateMachine {
     private StateMachine stateMachine;
     private Set<ITransition> transitions;
 
-    public ExampleStateMachine(){
+    public LoopStateMachine(){
         createTransitions();
         createStateMachine();
     }
 
     public void start(){
         System.out.println("===> FIRE START EVENT");
-        stateMachine.fire(ExampleEvent.EVT_START);
+        stateMachine.fire(LoopEvent.EVT_START);
     }
 
     public void connect(){
         System.out.println("===> FIRE CONNECT EVENT");
-        stateMachine.fire(ExampleEvent.EVT_CONNECT);
+        stateMachine.fire(LoopEvent.EVT_CONNECT);
     }
 
     public void finish(){
         System.out.println("===> FIRE FINISH EVENT");
-        stateMachine.fire(ExampleEvent.EVT_FINISH);
+        stateMachine.fire(LoopEvent.EVT_FINISH);
     }
 
     private void createTransitions(){
         transitions = new HashSet<ITransition>();
         transitions.add(new TransitionBuilder("transition 01")
-                .registerSourceState(ExampleState.STATE_INIT)
-                .registerDestinationState(ExampleState.STATE_STARTED)
-                .registerEvent(ExampleEvent.EVT_START)
+                .registerSourceState(LoopState.STATE_INIT)
+                .registerDestinationState(LoopState.STATE_STARTED)
+                .registerEvent(LoopEvent.EVT_START)
                 .registerActionHandler(new IActionHandler() {
                     @Override
                     public void executeAction(IEvent e) {
@@ -50,9 +44,9 @@ public class ExampleStateMachine {
                 })
                 .build());
         transitions.add(new TransitionBuilder("transition 02")
-                .registerSourceState(ExampleState.STATE_STARTED)
-                .registerDestinationState(ExampleState.STATE_CONNECTED)
-                .registerEvent(ExampleEvent.EVT_CONNECT)
+                .registerSourceState(LoopState.STATE_STARTED)
+                .registerDestinationState(LoopState.STATE_CONNECTED)
+                .registerEvent(LoopEvent.EVT_CONNECT)
                 .registerActionHandler(new IActionHandler() {
                     @Override
                     public void executeAction(IEvent e) {
@@ -61,9 +55,9 @@ public class ExampleStateMachine {
                 })
                 .build());
         transitions.add(new TransitionBuilder("transition 03")
-                .registerSourceState(ExampleState.STATE_CONNECTED)
-                .registerDestinationState(ExampleState.STATE_FINISHED)
-                .registerEvent(ExampleEvent.EVT_FINISH)
+                .registerSourceState(LoopState.STATE_CONNECTED)
+                .registerDestinationState(LoopState.STATE_FINISHED)
+                .registerEvent(LoopEvent.EVT_FINISH)
                 .registerActionHandler(new IActionHandler() {
                     @Override
                     public void executeAction(IEvent e) {
@@ -75,8 +69,8 @@ public class ExampleStateMachine {
 
     private void createStateMachine(){
         stateMachine = new StateMachineBuilder("test")
-                .registerInitialState(ExampleState.STATE_INIT)
-                .registerFinalState(ExampleState.STATE_FINISHED)
+                .registerInitialState(LoopState.STATE_INIT)
+                .registerFinalState(LoopState.STATE_FINISHED)
                 .registerTransitions(transitions)
                 .build();
     }

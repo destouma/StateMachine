@@ -10,8 +10,7 @@ public class StateMachine implements IStateMachine{
     private IEvent currentEvent;
 
     private Set<ITransition> transitions;
-    private Set<IState> states;
-    private Set<IEvent> events;
+
 
     StateMachine(String name){
         this.name = name;
@@ -19,7 +18,6 @@ public class StateMachine implements IStateMachine{
         this.initialState = null;
         this.currentState = null;
         this.finalState = null;
-        this.states = null;
         this.transitions = null;
     }
 
@@ -33,16 +31,8 @@ public class StateMachine implements IStateMachine{
         this.finalState = finalState;
     }
 
-    public void setStates(Set<IState> states) {
-        this.states = states;
-    }
-
     public void setTransitions(Set<ITransition> transitions) {
         this.transitions = transitions;
-    }
-
-    public void setEvents(Set<IEvent> events) {
-        this.events = events;
     }
 
     @Override
