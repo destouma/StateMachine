@@ -1,17 +1,18 @@
 # StateMachine
 Implementation of a basic State Machine
 
-the state machine:
+events (enum)
+states (enum)
+
+state machine:
 * name
 * transitions
-* events (enum)
-* states (enum)
 * init state
 * final state
 
-the transition:
+transition:
 * name
 * source state
-* destination state (enum)
-* event (enum)
+* destination state
+* event
 * action (callback)
