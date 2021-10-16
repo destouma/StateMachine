@@ -25,6 +25,16 @@ public class LoopStateMachine {
         stateMachine.fire(LoopEvent.EVT_CONNECT);
     }
 
+    public void receive(){
+        System.out.println("===> FIRE RECEIVE EVENT");
+        stateMachine.fire(LoopEvent.EVT_RECEIVE);
+    }
+
+    public void update(){
+        System.out.println("===> FIRE UPDATE EVENT");
+        stateMachine.fire(LoopEvent.EVT_UPDATE);
+    }
+
     public void finish(){
         System.out.println("===> FIRE FINISH EVENT");
         stateMachine.fire(LoopEvent.EVT_FINISH);
@@ -54,6 +64,8 @@ public class LoopStateMachine {
                     }
                 })
                 .build());
+
+        // option one: finish once connected
         transitions.add(new TransitionBuilder("transition 03")
                 .registerSourceState(LoopState.STATE_CONNECTED)
                 .registerDestinationState(LoopState.STATE_FINISHED)
@@ -62,6 +74,55 @@ public class LoopStateMachine {
                     @Override
                     public void executeAction(IEvent e) {
                         System.out.println("transition 03 CONNECTED ==> FINISHED");
+                    }
+                })
+                .build());
+
+        // option two: loop on receive and update
+        transitions.add(new TransitionBuilder("transition 04")
+                .registerSourceState(LoopState.STATE_CONNECTED)
+                .registerDestinationState(LoopState.STATE_RECEIVED)
+                .registerEvent(LoopEvent.EVT_RECEIVE)
+                .registerActionHandler(new IActionHandler() {
+                    @Override
+                    public void executeAction(IEvent e) {
+                        System.out.println("transition 04 CONNECTED ==> RECEIVED");
+                    }
+                })
+                .build());
+
+        transitions.add(new TransitionBuilder("transition 05")
+                .registerSourceState(LoopState.STATE_RECEIVED)
+                .registerDestinationState(LoopState.STATE_UPDATED)
+                .registerEvent(LoopEvent.EVT_UPDATE)
+                .registerActionHandler(new IActionHandler() {
+                    @Override
+                    public void executeAction(IEvent e) {
+                        System.out.println("transition 05 RECEIVED ==> UPDATED");
+                    }
+                })
+                .build());
+
+        transitions.add(new TransitionBuilder("transition 06")
+                .registerSourceState(LoopState.STATE_UPDATED)
+                .registerDestinationState(LoopState.STATE_FINISHED)
+                .registerEvent(LoopEvent.EVT_FINISH)
+                .registerActionHandler(new IActionHandler() {
+                    @Override
+                    public void executeAction(IEvent e) {
+                        System.out.println("transition 06 UPDATED ==> FINISHED");
+                    }
+                })
+                .build());
+
+        transitions.add(new TransitionBuilder("transition 07")
+                .registerSourceState(LoopState.STATE_UPDATED)
+                .registerDestinationState(LoopState.STATE_RECEIVED)
+                .registerEvent(LoopEvent.EVT_RECEIVE)
+                .registerActionHandler(new IActionHandler() {
+                    @Override
+                    public void executeAction(IEvent e) {
+                        System.out.println("transition 07 UPDATED ==> RECEIVED");
                     }
                 })
                 .build());

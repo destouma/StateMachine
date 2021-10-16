@@ -33,8 +33,9 @@ public class StateMachine implements IStateMachine{
     }
 
     @Override
-    public void init() {
+    public IState init() {
         this.currentState = this.initialState;
+        return this.currentState;
     }
 
     @Override

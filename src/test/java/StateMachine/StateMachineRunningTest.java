@@ -149,6 +149,31 @@ public class StateMachineRunningTest {
                 .build();
 
         stateMachine.fire(TestEvent.TEST_EVENT_1);
+        assert(stateMachine.init() == TestState.TEST_STATE_1);
+    }
+
+    @Test
+    public void fireEventAndInitInitStateMachine() {
+        Set<ITransition> testTransitions = new HashSet<ITransition>();
+        testTransitions.add(new TransitionBuilder("test01")
+                .registerSourceState(TestState.TEST_STATE_1)
+                .registerDestinationState(TestState.TEST_STATE_2)
+                .registerEvent(TestEvent.TEST_EVENT_1)
+                .registerActionHandler(null)
+                .build());
+        testTransitions.add(new TransitionBuilder("test02")
+                .registerSourceState(TestState.TEST_STATE_2)
+                .registerDestinationState(TestState.TEST_STATE_3)
+                .registerEvent(TestEvent.TEST_EVENT_2)
+                .registerActionHandler(null)
+                .build());
+        StateMachine stateMachine = new StateMachineBuilder("test")
+                .registerInitialState(TestState.TEST_STATE_1)
+                .registerFinalState(TestState.TEST_STATE_3)
+                .registerTransitions(testTransitions)
+                .build();
+
+        stateMachine.fire(TestEvent.TEST_EVENT_1);
         stateMachine.init();
         assert(stateMachine.getCurrentState() == TestState.TEST_STATE_1);
     }

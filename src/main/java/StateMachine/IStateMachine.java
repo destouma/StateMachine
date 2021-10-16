@@ -4,7 +4,7 @@ import java.util.Set;
 
 public interface IStateMachine {
 
-    void init();
+    IState init();
 
     String getName();
 
