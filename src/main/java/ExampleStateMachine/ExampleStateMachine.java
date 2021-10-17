@@ -2,13 +2,11 @@ package ExampleStateMachine;
 
 import StateMachine.IStateMachine;
 import StateMachine.ITransition;
-import StateMachine.IState;
 import StateMachine.IEvent;
 import StateMachine.StateMachineBuilder;
 import StateMachine.TransitionBuilder;
 import StateMachine.IActionHandler;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 

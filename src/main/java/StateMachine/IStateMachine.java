@@ -1,7 +1,5 @@
 package StateMachine;
 
-import java.util.Set;
-
 public interface IStateMachine {
 
     IState init();
