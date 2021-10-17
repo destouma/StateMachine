@@ -7,12 +7,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class LoopStateMachine {
-    private StateMachine stateMachine;
-    private Set<ITransition> transitions;
+    private IStateMachine stateMachine;
 
     public LoopStateMachine(){
-        createTransitions();
-        createStateMachine();
+        this.stateMachine = createStateMachine(createTransitions());
     }
 
     public void start(){
@@ -40,8 +38,8 @@ public class LoopStateMachine {
         stateMachine.fire(LoopEvent.EVT_FINISH);
     }
 
-    private void createTransitions(){
-        transitions = new HashSet<ITransition>();
+    private Set<ITransition> createTransitions(){
+        Set<ITransition> transitions = new HashSet<>();
         transitions.add(new TransitionBuilder("transition 01")
                 .registerSourceState(LoopState.STATE_INIT)
                 .registerDestinationState(LoopState.STATE_STARTED)
@@ -126,10 +124,11 @@ public class LoopStateMachine {
                     }
                 })
                 .build());
+        return transitions;
     }
 
-    private void createStateMachine(){
-        stateMachine = new StateMachineBuilder("test")
+    private IStateMachine createStateMachine(Set<ITransition> transitions){
+        return new StateMachineBuilder("test")
                 .registerInitialState(LoopState.STATE_INIT)
                 .registerFinalState(LoopState.STATE_FINISHED)
                 .registerTransitions(transitions)

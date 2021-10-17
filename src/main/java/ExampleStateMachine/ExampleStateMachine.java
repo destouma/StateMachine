@@ -1,6 +1,6 @@
 package ExampleStateMachine;
 
-import StateMachine.StateMachine;
+import StateMachine.IStateMachine;
 import StateMachine.ITransition;
 import StateMachine.IState;
 import StateMachine.IEvent;
@@ -13,31 +13,29 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class ExampleStateMachine {
-    private StateMachine stateMachine;
-    private Set<ITransition> transitions;
+    private IStateMachine stateMachine;
 
     public ExampleStateMachine(){
-        createTransitions();
-        createStateMachine();
+        this.stateMachine = createStateMachine(createTransitions());
     }
 
     public void start(){
         System.out.println("===> FIRE START EVENT");
-        stateMachine.fire(ExampleEvent.EVT_START);
+        this.stateMachine.fire(ExampleEvent.EVT_START);
     }
 
     public void connect(){
         System.out.println("===> FIRE CONNECT EVENT");
-        stateMachine.fire(ExampleEvent.EVT_CONNECT);
+        this.stateMachine.fire(ExampleEvent.EVT_CONNECT);
     }
 
     public void finish(){
         System.out.println("===> FIRE FINISH EVENT");
-        stateMachine.fire(ExampleEvent.EVT_FINISH);
+        this.stateMachine.fire(ExampleEvent.EVT_FINISH);
     }
 
-    private void createTransitions(){
-        transitions = new HashSet<ITransition>();
+    private Set<ITransition> createTransitions(){
+        Set<ITransition> transitions = new HashSet<>();
         transitions.add(new TransitionBuilder("transition 01")
                 .registerSourceState(ExampleState.STATE_INIT)
                 .registerDestinationState(ExampleState.STATE_STARTED)
@@ -71,14 +69,14 @@ public class ExampleStateMachine {
                     }
                 })
                 .build());
+        return transitions;
     }
 
-    private void createStateMachine(){
-        stateMachine = new StateMachineBuilder("test")
+    private IStateMachine createStateMachine(Set<ITransition> transitions){
+        return  new StateMachineBuilder("test")
                 .registerInitialState(ExampleState.STATE_INIT)
                 .registerFinalState(ExampleState.STATE_FINISHED)
                 .registerTransitions(transitions)
                 .build();
     }
-
 }
