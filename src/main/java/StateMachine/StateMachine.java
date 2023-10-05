@@ -8,7 +8,8 @@ public class StateMachine implements IStateMachine{
     private IState currentState;
     private IState finalState;
 
-    private Set<ITransition> transitions;
+//    private Set<ITransition> transitions;
+    private Transitions transitions;
 
     StateMachine(String name){
         this.name = name;
@@ -28,7 +29,7 @@ public class StateMachine implements IStateMachine{
         this.finalState = finalState;
     }
 
-    public void setTransitions(Set<ITransition> transitions) {
+    public void setTransitions(Transitions transitions) {
         this.transitions = transitions;
     }
 
@@ -63,15 +64,15 @@ public class StateMachine implements IStateMachine{
         if(event == null){
             return null;
         }else{
-            for (ITransition transition : transitions) {
-                if (currentState == transition.getSourceState()
-                    && event == transition.getEvent() ) {
-                    if(transition.getActionHandler() !=null){
-                        transition.getActionHandler().executeAction(event);
-                    }
-                    currentState = transition.getDestinationState();
-                    break;
+            ITransition tmpT = transitions.get(currentState,event);
+            if(tmpT != null){
+                if(tmpT.getActionHandler() != null){
+                    tmpT.getActionHandler().executeAction(event);
                 }
+                currentState =tmpT.getDestinationState();
+            }
+            if(transitions.contains(currentState,event)){
+
             }
             return currentState;
         }

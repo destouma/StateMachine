@@ -1,5 +1,6 @@
 package StateMachine;
 
+import java.util.HashMap;
 import java.util.Set;
 
 public class StateMachineBuilder {
@@ -19,7 +20,7 @@ public class StateMachineBuilder {
         return this;
     }
 
-    public StateMachineBuilder registerTransitions(Set<ITransition> transitions){
+    public StateMachineBuilder registerTransitions( Transitions transitions){
         this.stateMachine.setTransitions(transitions);
         return this;
     }

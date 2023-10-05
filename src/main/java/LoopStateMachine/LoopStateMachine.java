@@ -37,8 +37,8 @@ public class LoopStateMachine {
         stateMachine.fire(LoopEvent.EVT_FINISH);
     }
 
-    private Set<ITransition> createTransitions(){
-        Set<ITransition> transitions = new HashSet<>();
+    private Transitions createTransitions(){
+        Transitions transitions = new Transitions();
         transitions.add(new TransitionBuilder("transition 01")
                 .registerSourceState(LoopState.STATE_INIT)
                 .registerDestinationState(LoopState.STATE_STARTED)
@@ -126,12 +126,11 @@ public class LoopStateMachine {
         return transitions;
     }
 
-    private IStateMachine createStateMachine(Set<ITransition> transitions){
+    private IStateMachine createStateMachine(Transitions transitions){
         return new StateMachineBuilder("test")
                 .registerInitialState(LoopState.STATE_INIT)
                 .registerFinalState(LoopState.STATE_FINISHED)
                 .registerTransitions(transitions)
                 .build();
     }
-
 }

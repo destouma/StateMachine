@@ -1,11 +1,6 @@
 package ExampleStateMachine;
 
-import StateMachine.IStateMachine;
-import StateMachine.ITransition;
-import StateMachine.IEvent;
-import StateMachine.StateMachineBuilder;
-import StateMachine.TransitionBuilder;
-import StateMachine.IActionHandler;
+import StateMachine.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -32,8 +27,8 @@ public class ExampleStateMachine {
         this.stateMachine.fire(ExampleEvent.EVT_FINISH);
     }
 
-    private Set<ITransition> createTransitions(){
-        Set<ITransition> transitions = new HashSet<>();
+    private Transitions createTransitions(){
+        Transitions transitions = new Transitions();
         transitions.add(new TransitionBuilder("transition 01")
                 .registerSourceState(ExampleState.STATE_INIT)
                 .registerDestinationState(ExampleState.STATE_STARTED)
@@ -70,11 +65,12 @@ public class ExampleStateMachine {
         return transitions;
     }
 
-    private IStateMachine createStateMachine(Set<ITransition> transitions){
+    private IStateMachine createStateMachine(Transitions transitions){
         return  new StateMachineBuilder("test")
                 .registerInitialState(ExampleState.STATE_INIT)
                 .registerFinalState(ExampleState.STATE_FINISHED)
                 .registerTransitions(transitions)
                 .build();
     }
+
 }
